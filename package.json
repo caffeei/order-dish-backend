@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
@@ -23,10 +23,14 @@
   "dependencies": {
     "@nestjs/common": "^7.5.1",
     "@nestjs/core": "^7.5.1",
+    "@nestjs/mongoose": "^7.2.3",
     "@nestjs/platform-express": "^7.5.1",
+    "@nestjs/swagger": "^4.7.15",
+    "mongoose": "^5.11.18",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.3"
+    "rxjs": "^6.6.3",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",
@@ -34,6 +38,7 @@
     "@nestjs/testing": "^7.5.1",
     "@types/express": "^4.17.8",
     "@types/jest": "^26.0.15",
+    "@types/mongoose": "^5.10.3",
     "@types/node": "^14.14.6",
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
@@ -56,7 +61,7 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
@@ -64,7 +69,19 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/src/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "libs/db/(.*)": "<rootDir>/libs/@libs/db/src/$1",
+      "libs/db": "<rootDir>/libs/@libs/db/src",
+      "@app/db-module/(.*)": "<rootDir>/libs/db-module/src/$1",
+      "@app/db-module": "<rootDir>/libs/db-module/src",
+      "@app/db/(.*)": "<rootDir>/libs/db/src/$1",
+      "@app/db": "<rootDir>/libs/db/src"
+    }
   }
 }
