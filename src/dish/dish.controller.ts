@@ -8,6 +8,8 @@ import {
   Param,
   Post,
   Put,
+  UsePipes,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
@@ -16,20 +18,31 @@ import { ApiOperation, ApiTags } from '@nestjs/swagger';
 export class DishController {
   constructor(private readonly dishService: DishService) {}
 
+  @Get("/:pageNum/:pageSize")
+  @ApiOperation({
+    summary: '获取全部菜品信息分页展示',
+  })
+  @UsePipes(new ParseIntPipe())
+  getAll(@Param("pageNum") pageNum: number, @Param("pageSize") pageSize: number) {
+    return this.dishService.findAll(pageNum, pageSize);
+  }
+
   @Get()
   @ApiOperation({
     summary: '获取全部菜品信息',
   })
-  getAll() {
-    return this.dishService.getAll();
+  @UsePipes(new ParseIntPipe())
+  getDish() {
+    return this.dishService.findDish();
   }
+
 
   @Get(':_id')
   @ApiOperation({
     summary: '根据菜品id获取单个菜品信息',
   })
   getById(@Param('_id') _id: string) {
-    return this.dishService.getById(_id);
+    return this.dishService.findOneById(_id);
   }
 
   @Post()

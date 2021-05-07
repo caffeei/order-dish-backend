@@ -2,11 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateDishDto {
   @ApiProperty()
-  name: string;
+  dishName: string;
   @ApiProperty()
   price: number;
   @ApiProperty()
-  state: boolean;
+  status: boolean;
   @ApiProperty({
     required: false,
   })

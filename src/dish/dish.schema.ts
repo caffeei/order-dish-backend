@@ -11,7 +11,7 @@ export class Dish extends Document {
   @Prop({
     required: true,
   })
-  name: string;
+  dishName: string;
   @Prop({
     required: true,
   })
@@ -19,7 +19,7 @@ export class Dish extends Document {
   @Prop({
     required: true,
   })
-  state: boolean;
+  status: boolean;
   @Prop()
   imgUrl: string;
 }

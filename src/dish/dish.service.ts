@@ -11,13 +11,24 @@ import { Dish, DishDocument } from './dish.schema';
 export class DishService {
   constructor(
     @InjectModel('Dish') private readonly dishModel: Model<DishDocument>,
-  ) {}
+  ) { }
 
-  async getAll(): Promise<Dish[]> {
-    return this.dishModel.find().exec();
+  async findAll(pageNum: number, pageSize: number): Promise<any> {
+    const data = await this.dishModel.find().skip((pageNum - 1) * pageSize).limit(pageSize).exec();
+    const total = await this.dishModel.countDocuments().exec();
+    return {
+      data,
+      total,
+      pageNum,
+      pageSize
+    }
   }
 
-  async getById(_id: string): Promise<Dish> {
+  async findDish(): Promise<any> {
+    return this.dishModel.find().exec()
+  }
+
+  async findOneById(_id: string): Promise<Dish> {
     return this.dishModel.findById(_id).exec();
   }
 

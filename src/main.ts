@@ -9,7 +9,7 @@ async function bootstrap() {
     .setTitle('Order-Dish Web System APIs Doc')
     .setDescription('点餐系统接口文档')
     .setVersion('1.0')
-    .addTag('baseURL', '192.168.31.78:4000')
+    .addTag('baseURL', 'localhost:4000')
     .build();
   const document = SwaggerModule.createDocument(app, options);
 
