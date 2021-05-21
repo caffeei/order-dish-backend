@@ -6,6 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { MealTableController } from './meal-table/meal-table.controller';
 import { MealTableModule } from './meal-table/meal-table.module';
 import { OrderModule } from './order/order.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { OrderModule } from './order/order.module';
     DishModule,
     MealTableModule,
     OrderModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
