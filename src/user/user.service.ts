@@ -29,8 +29,6 @@ export class UserService {
         return res;
     }
 
-    // async findOneByUsername(username: string)
-
     async create(createDto: CreateUserDto): Promise<User> {
         const createdOrder = new this.userModel(createDto);
         return createdOrder.save();

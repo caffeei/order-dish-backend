@@ -13,4 +13,6 @@ export class CreateOrderDto {
   totalPrice: number;
   @ApiProperty()
   status: boolean;
+  @ApiProperty()
+  username: string;
 }

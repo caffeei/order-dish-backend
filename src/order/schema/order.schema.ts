@@ -33,6 +33,10 @@ export class Order extends Document {
     required: true,
   })
   status: boolean;
+  @Prop({
+    required: true,
+  })
+  username: string;
 }
 
 export const OrderSchema = SchemaFactory.createForClass(Order);
