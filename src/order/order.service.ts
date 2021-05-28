@@ -11,7 +11,7 @@ export class OrderService {
     ) { }
 
     async findAll(): Promise<any> {
-        return this.orderModel.find().exec()
+        return this.orderModel.find().sort({"status": false, "_id": -1}).exec()
     }
 
     async findOneById(_id: string): Promise<Order> {

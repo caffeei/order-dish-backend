@@ -2,6 +2,7 @@ import { Controller, Get, Param, Post, Body, Delete, Put } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/user.dto';
+import { LoginDto } from './dto/login.dto';
 
 @ApiTags("User")
 @Controller('user')
@@ -42,10 +43,18 @@ export class UserController {
 
     @Delete(':_id')
     @ApiOperation({
-      summary: '根据员工Id删除员工信息',
+        summary: '根据员工Id删除员工信息',
     })
     remove(@Param('_id') _id: string) {
-      return this.userService.remove(_id);
+        return this.userService.remove(_id);
+    }
+
+    @Post("login")
+    @ApiOperation({
+        summary: '根据员工用户名和密码登录',
+    })
+    login(@Body() loginDto:LoginDto) {
+        return this.userService.userLogin(loginDto);
     }
 }
 

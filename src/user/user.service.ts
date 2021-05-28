@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserDocument, User } from './schema/user.schema';
 import { CreateUserDto } from './dto/user.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class UserService {
@@ -17,6 +18,18 @@ export class UserService {
     async findOneById(_id: string): Promise<User> {
         return this.userModel.findById(_id).exec();
     }
+
+    async userLogin(loginDto: LoginDto): Promise<Object> {
+        const user = await this.userModel.findById(loginDto._id).exec();
+        const res:any = {};
+        res.currentAuthority = user.type;
+        user.password === loginDto.password 
+            ? res.status="ok" 
+            : res.status="error";
+        return res;
+    }
+
+    // async findOneByUsername(username: string)
 
     async create(createDto: CreateUserDto): Promise<User> {
         const createdOrder = new this.userModel(createDto);

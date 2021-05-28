@@ -12,6 +12,10 @@ export class User extends Document {
   @Prop({
     required: true,
   })
+  type: "admin" | "user";
+  @Prop({
+    required: true,
+  })
   _id: string;
   @Prop({
     required: true,
